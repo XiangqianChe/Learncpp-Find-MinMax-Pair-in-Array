@@ -25,17 +25,28 @@ void printArray(const std::vector<T>& v)
 
 int main()
 {
-    std::vector v1{ 3, 8, 2, 5, 7, 8, 3 };
+    std::vector<int> v1{};
+    std::cout << "Enter numbers to add (use -1 to stop): ";
+    while (true)
+    {
+        int i{};
+        std::cin >> i;
+        if (i == -1) break;
+
+        if (!std::cin)
+        {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            continue;
+        }
+
+        v1.emplace_back(i);
+    }
+
     printArray(v1);
     auto m1{ findMinMax(v1) };
     std::cout << "The min element has index " << m1.first << " and value " << v1[m1.first] << '\n';
     std::cout << "The max element has index " << m1.second << " and value " << v1[m1.second] << '\n';
-
-    std::vector v2{ 5.5, 2.7, 3.3, 7.6, 1.2, 8.8, 6.6 };
-    printArray(v2);
-    auto m2{ findMinMax(v2) };
-    std::cout << "The min element has index " << m2.first << " and value " << v2[m2.first] << '\n';
-    std::cout << "The max element has index " << m2.second << " and value " << v2[m2.second] << '\n';
 
     return 0;
 }
